@@ -1,0 +1,32 @@
+{
+  "name": "life-site",
+  "private": true,
+  "version": "0.1.0",
+  "type": "module",
+  "scripts": {
+    "dev": "concurrently -k -n vite,api,build -c blue,magenta,green \"vite\" \"wrangler pages dev --proxy 5173 --compatibility-date=2024-11-01\" \"vite build --watch\"",
+    "build": "tsc -p tsconfig.app.json --noEmit && vite build",
+    "preview": "wrangler pages dev dist --compatibility-date=2024-11-01",
+    "lint": "tsc -p tsconfig.app.json --noEmit",
+    "db:migrate:local": "wrangler d1 migrations apply life-db --local",
+    "db:migrate:remote": "wrangler d1 migrations apply life-db --remote"
+  },
+  "dependencies": {
+    "react": "^18.3.1",
+    "react-dom": "^18.3.1",
+    "react-router-dom": "^6.28.0"
+  },
+  "devDependencies": {
+    "@cloudflare/workers-types": "^4.20241127.0",
+    "@types/react": "^18.3.12",
+    "@types/react-dom": "^18.3.1",
+    "@vitejs/plugin-react": "^4.3.4",
+    "autoprefixer": "^10.4.20",
+    "concurrently": "^9.2.1",
+    "postcss": "^8.4.49",
+    "tailwindcss": "^3.4.16",
+    "typescript": "^5.6.3",
+    "vite": "^5.4.11",
+    "wrangler": "^3.94.0"
+  }
+}

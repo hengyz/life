@@ -1,0 +1,28 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+@layer base {
+  html {
+    @apply scroll-smooth;
+  }
+
+  body {
+    @apply bg-cream text-ink font-sans antialiased;
+    min-height: 100dvh;
+  }
+}
+
+@layer components {
+  .page-container {
+    @apply mx-auto w-full max-w-lg px-4 pb-8 pt-6;
+  }
+
+  .timeline-line {
+    @apply absolute left-[1.125rem] top-0 h-full w-0.5 bg-warm-200;
+  }
+
+  .timeline-dot {
+    @apply absolute left-3 top-6 z-10 h-3 w-3 rounded-full border-2 border-warm-400 bg-cream;
+  }
+}
