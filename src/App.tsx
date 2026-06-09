@@ -67,7 +67,6 @@ export function App() {
           <Route path="dashboard" element={<AdminDashboard />} />
           <Route path="pet" element={<PetProfileEditor />} />
           <Route path="timeline" element={<TimelineManager />} />
-          <Route path="timeline/new" element={<TimelineNodeEditor />} />
           <Route path="timeline/:id" element={<TimelineNodeEditor />} />
           <Route path="prep" element={<PrepAdminLayout />}>
             <Route index element={<PrepDashboard />} />

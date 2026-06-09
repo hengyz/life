@@ -18,9 +18,9 @@ interface MediaFormItem {
 }
 
 export function TimelineNodeEditor() {
-  const { id } = useParams<{ id: string }>();
+  const { id } = useParams<{ id?: string }>();
   const navigate = useNavigate();
-  const isNew = id === 'new';
+  const isNew = !id || id === 'new';
 
   const [title, setTitle] = useState('');
   const [content, setContent] = useState('');
