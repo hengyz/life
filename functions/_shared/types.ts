@@ -3,6 +3,7 @@ export interface Env {
   MEDIA?: R2Bucket;
   ADMIN_PASSWORD: string;
   JWT_SECRET: string;
+  R2_PUBLIC_URL?: string;
 }
 
 export interface PetProfile {

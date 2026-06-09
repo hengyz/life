@@ -1,4 +1,5 @@
 import { requireAdmin } from '../../../_shared/auth';
+import { buildR2Key } from '../../../_shared/r2';
 import { errorResponse, handleOptions, jsonResponse } from '../../../_shared/response';
 import type { Env } from '../../../_shared/types';
 
@@ -27,7 +28,7 @@ export const onRequest: PagesFunction<Env> = async (context) => {
 
   if (!body.filename) return errorResponse('filename is required', 400);
 
-  const key = `media/${Date.now()}-${body.filename}`;
+  const key = buildR2Key(`${Date.now()}-${body.filename}`);
 
   return jsonResponse({
     uploadUrl: null,

@@ -7,12 +7,13 @@ binding = "DB"
 database_name = "life-db"
 database_id = "7cb16e9d-e4fd-43cc-afd1-b2b47ae55c32"
 
-# Uncomment and configure after creating R2 bucket
-#[[r2_buckets]]
-#binding = "MEDIA"
-#bucket_name = "life-photos"
+[[r2_buckets]]
+binding = "MEDIA"
+bucket_name = "photos"
+# Shared bucket: life-site uses `life/` prefix, wedding-site uses `wedding/` prefix
 
 [vars]
 # Set in Cloudflare Pages dashboard for production:
 # ADMIN_PASSWORD = "your-secure-password"
 # JWT_SECRET = "your-jwt-secret"
+# R2_PUBLIC_URL = "https://photos.guangying.world"

@@ -110,10 +110,11 @@ Migration 文件位于 `migrations/0001_init.sql`，包含三张表：
 - Variable name: `DB`
 - D1 database: `life-db`
 
-（可选）R2 绑定：
+（可选）R2 绑定（与 wedding-site 共用 `photos` bucket，life 文件存 `life/` 目录）：
 
 - Variable name: `MEDIA`
-- R2 bucket: `life-media`
+- R2 bucket: `photos`
+- 环境变量 `R2_PUBLIC_URL`：`https://photos.guangying.world`（与 wedding 共用）
 
 ## 部署到 Cloudflare Pages
 
