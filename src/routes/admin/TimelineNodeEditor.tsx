@@ -83,6 +83,13 @@ export function TimelineNodeEditor() {
     setMedia((prev) => prev.filter((_, i) => i !== index));
   }
 
+  function addImagesFromUpload(urls: string[]) {
+    setMedia((prev) => [
+      ...prev,
+      ...urls.map((url) => ({ type: 'image' as const, url, caption: '' })),
+    ]);
+  }
+
   async function handleSubmit(e: React.FormEvent) {
     e.preventDefault();
     if (!eventDate || !title) {
@@ -217,6 +224,15 @@ export function TimelineNodeEditor() {
                 + 视频
               </Button>
             </div>
+          </div>
+
+          <div className="mb-3">
+            <ImageUploadButton
+              folder="dog"
+              multiple
+              label="批量上传图片"
+              onBatchUploaded={addImagesFromUpload}
+            />
           </div>
 
           {media.map((item, index) => (

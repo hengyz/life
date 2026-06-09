@@ -174,6 +174,34 @@ export async function adminUploadImage(
   return res.json();
 }
 
+export async function adminUploadImages(
+  files: File[],
+  folder: UploadFolder,
+): Promise<{ urls: string[]; failed: number }> {
+  if (files.length === 0) return { urls: [], failed: 0 };
+
+  const results = await Promise.allSettled(files.map((file) => adminUploadImage(file, folder)));
+  const urls: string[] = [];
+  let failed = 0;
+
+  for (const result of results) {
+    if (result.status === 'fulfilled') {
+      urls.push(result.value.url);
+    } else {
+      failed += 1;
+    }
+  }
+
+  if (urls.length === 0 && failed > 0) {
+    const reason = results.find((r) => r.status === 'rejected') as PromiseRejectedResult;
+    throw reason.reason instanceof ApiError
+      ? reason.reason
+      : new ApiError('上传失败', 500);
+  }
+
+  return { urls, failed };
+}
+
 // Prep API
 export function fetchPrepOverview(): Promise<PrepOverview> {
   return request<PrepOverview>('/prep');
