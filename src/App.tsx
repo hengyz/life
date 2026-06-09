@@ -1,4 +1,4 @@
-import { Navigate, Outlet, Route, Routes } from 'react-router-dom';
+import { Navigate, Outlet, Route, Routes, useLocation } from 'react-router-dom';
 import { AdminLayout } from './components/AdminLayout';
 import { isLoggedIn } from './lib/auth';
 import { DogHome } from './routes/DogHome';
@@ -26,11 +26,21 @@ function RequireAuth({ children }: { children: React.ReactNode }) {
   return <>{children}</>;
 }
 
-function GyAdminIndex() {
+function AdminIndex() {
   if (isLoggedIn()) {
     return <Navigate to="/admin/dashboard" replace />;
   }
   return <AdminLogin />;
+}
+
+function LegacyAdminRedirect() {
+  const { pathname, search, hash } = useLocation();
+  return (
+    <Navigate
+      to={`${pathname.replace(/^\/gy-admin/, '/admin')}${search}${hash}`}
+      replace
+    />
+  );
 }
 
 export function App() {
@@ -46,7 +56,7 @@ export function App() {
       <Route path="/prep/checklist" element={<PrepChecklist />} />
 
       <Route path="/admin" element={<Outlet />}>
-        <Route index element={<GyAdminIndex />} />
+        <Route index element={<AdminIndex />} />
         <Route
           element={
             <RequireAuth>
@@ -67,6 +77,8 @@ export function App() {
           </Route>
         </Route>
       </Route>
+
+      <Route path="/gy-admin/*" element={<LegacyAdminRedirect />} />
     </Routes>
   );
 }
