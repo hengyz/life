@@ -59,6 +59,7 @@ export function PetProfileEditor() {
           placeholder="https://..."
         />
         <ImageUploadButton
+          folder="dog"
           label="上传头像"
           onUploaded={(url) => update('avatar_url', url)}
         />

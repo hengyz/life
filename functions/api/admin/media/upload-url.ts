@@ -1,5 +1,5 @@
 import { requireAdmin } from '../../../_shared/auth';
-import { buildR2Key, r2PublicUrl } from '../../../_shared/r2';
+import { buildR2Key, isR2Folder, r2PublicUrl } from '../../../_shared/r2';
 import { errorResponse, handleOptions, jsonResponse } from '../../../_shared/response';
 import type { Env } from '../../../_shared/types';
 
@@ -16,7 +16,7 @@ export const onRequest: PagesFunction<Env> = async (context) => {
     return errorResponse('R2 未绑定，请使用手动 URL 输入', 503);
   }
 
-  let body: { filename?: string; contentType?: string };
+  let body: { filename?: string; contentType?: string; folder?: string };
   try {
     body = await request.json();
   } catch {
@@ -25,8 +25,13 @@ export const onRequest: PagesFunction<Env> = async (context) => {
 
   if (!body.filename) return errorResponse('filename is required', 400);
 
+  const folder = body.folder?.trim() || '';
+  if (!isR2Folder(folder)) {
+    return errorResponse('folder 必须是 dog（狗狗）或 prep（备婚）', 400);
+  }
+
   const safeName = body.filename.replace(/[^a-zA-Z0-9._-]/g, '_');
-  const key = buildR2Key(`${Date.now()}-${safeName}`);
+  const key = buildR2Key(folder, `${Date.now()}-${safeName}`);
 
   return jsonResponse({
     key,

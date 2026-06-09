@@ -175,7 +175,7 @@ export function TimelineNodeEditor() {
           onChange={(e) => setCoverUrl(e.target.value)}
           placeholder="https://..."
         />
-        <ImageUploadButton label="上传封面图" onUploaded={setCoverUrl} />
+        <ImageUploadButton folder="dog" label="上传封面图" onUploaded={setCoverUrl} />
 
         <div>
           <label className="mb-1.5 block text-sm font-medium text-ink/80">可见性</label>
@@ -242,6 +242,7 @@ export function TimelineNodeEditor() {
               {item.type === 'image' && (
                 <div className="mt-2">
                   <ImageUploadButton
+                    folder="dog"
                     label="上传图片"
                     onUploaded={(url) => updateMedia(index, 'url', url)}
                   />

@@ -2,6 +2,7 @@ import { requireAdmin } from '../../../_shared/auth';
 import {
   buildR2Key,
   extFromImageType,
+  isR2Folder,
   R2_ALLOWED_IMAGE_TYPES,
   R2_MAX_IMAGE_SIZE,
   r2PublicUrl,
@@ -49,8 +50,13 @@ export const onRequest: PagesFunction<Env> = async (context) => {
     return errorResponse('图片大小不能超过 10MB', 400);
   }
 
+  const folder = formData.get('folder')?.toString().trim() || '';
+  if (!isR2Folder(folder)) {
+    return errorResponse('folder 必须是 dog（狗狗）或 prep（备婚）', 400);
+  }
+
   const ext = extFromImageType(file.type);
-  const key = buildR2Key(`${Date.now()}-${crypto.randomUUID().slice(0, 8)}.${ext}`);
+  const key = buildR2Key(folder, `${Date.now()}-${crypto.randomUUID().slice(0, 8)}.${ext}`);
 
   await env.MEDIA.put(key, file.stream(), {
     httpMetadata: { contentType: file.type },

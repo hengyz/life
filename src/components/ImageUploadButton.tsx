@@ -1,8 +1,9 @@
 import { useRef, useState } from 'react';
-import { adminUploadImage } from '../lib/api';
+import { adminUploadImage, type UploadFolder } from '../lib/api';
 import { Button } from './Button';
 
 interface ImageUploadButtonProps {
+  folder: UploadFolder;
   onUploaded: (url: string) => void;
   disabled?: boolean;
   label?: string;
@@ -10,6 +11,7 @@ interface ImageUploadButtonProps {
 }
 
 export function ImageUploadButton({
+  folder,
   onUploaded,
   disabled,
   label = '上传图片',
@@ -26,7 +28,7 @@ export function ImageUploadButton({
     setError('');
     setUploading(true);
     try {
-      const { url } = await adminUploadImage(file);
+      const { url } = await adminUploadImage(file, folder);
       onUploaded(url);
     } catch (err) {
       setError(err instanceof Error ? err.message : '上传失败');

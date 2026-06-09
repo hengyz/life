@@ -1,6 +1,14 @@
 /** Object key prefix in shared R2 bucket `photos`. */
 export const R2_PREFIX = 'life';
 
+/** Subfolders under `life/` for each module. */
+export const R2_FOLDERS = {
+  dog: '狗狗',
+  prep: '备婚',
+} as const;
+
+export type R2Folder = keyof typeof R2_FOLDERS;
+
 export const R2_MAX_IMAGE_SIZE = 10 * 1024 * 1024; // 10MB
 
 export const R2_ALLOWED_IMAGE_TYPES = new Set([
@@ -10,8 +18,12 @@ export const R2_ALLOWED_IMAGE_TYPES = new Set([
   'image/gif',
 ]);
 
-export function buildR2Key(relativePath: string): string {
-  return `${R2_PREFIX}/${relativePath}`;
+export function isR2Folder(value: string): value is R2Folder {
+  return value in R2_FOLDERS;
+}
+
+export function buildR2Key(folder: R2Folder, relativePath: string): string {
+  return `${R2_PREFIX}/${R2_FOLDERS[folder]}/${relativePath}`;
 }
 
 export function r2PublicUrl(env: { R2_PUBLIC_URL?: string }, key: string): string | null {

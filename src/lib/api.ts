@@ -140,9 +140,15 @@ export function adminDeleteNode(id: number): Promise<{ success: boolean }> {
   return request(`/admin/timeline/${id}`, { method: 'DELETE' }, true);
 }
 
-export async function adminUploadImage(file: File): Promise<{ url: string; key: string }> {
+export type UploadFolder = 'dog' | 'prep';
+
+export async function adminUploadImage(
+  file: File,
+  folder: UploadFolder,
+): Promise<{ url: string; key: string }> {
   const form = new FormData();
   form.append('file', file);
+  form.append('folder', folder);
 
   const headers: Record<string, string> = {};
   const token = getToken();
