@@ -51,7 +51,7 @@ export function PrepHome() {
       {isLoggedIn() && (
         <div className="mb-4 flex justify-end">
           <Link
-            to="/gy-admin/prep"
+            to="/admin/prep"
             className="rounded-lg bg-rose-50 px-3 py-1.5 text-xs text-rose-600 transition-colors hover:bg-rose-100"
           >
             管理后台

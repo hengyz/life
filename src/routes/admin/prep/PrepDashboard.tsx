@@ -69,17 +69,17 @@ export function PrepDashboard() {
       </div>
 
       <div className="space-y-2">
-        <Link to="/gy-admin/prep/profile">
+        <Link to="/admin/prep/profile">
           <Button variant="secondary" fullWidth>
             编辑基本信息
           </Button>
         </Link>
-        <Link to="/gy-admin/prep/budget">
+        <Link to="/admin/prep/budget">
           <Button variant="secondary" fullWidth>
             管理预算
           </Button>
         </Link>
-        <Link to="/gy-admin/prep/checklist">
+        <Link to="/admin/prep/checklist">
           <Button fullWidth>管理计划清单</Button>
         </Link>
       </div>

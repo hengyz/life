@@ -1,10 +1,10 @@
 import { Link, NavLink, Outlet } from 'react-router-dom';
 
 const tabs = [
-  { to: '/gy-admin/prep', label: '概览', end: true },
-  { to: '/gy-admin/prep/profile', label: '基本信息' },
-  { to: '/gy-admin/prep/budget', label: '预算' },
-  { to: '/gy-admin/prep/checklist', label: '计划' },
+  { to: '/admin/prep', label: '概览', end: true },
+  { to: '/admin/prep/profile', label: '基本信息' },
+  { to: '/admin/prep/budget', label: '预算' },
+  { to: '/admin/prep/checklist', label: '计划' },
 ];
 
 export function PrepAdminLayout() {

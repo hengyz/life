@@ -122,7 +122,7 @@ export function TimelineNodeEditor() {
       } else {
         await adminUpdateNode(parseInt(id!, 10), payload);
       }
-      navigate('/gy-admin/timeline');
+      navigate('/admin/timeline');
     } catch (err) {
       setError(err instanceof Error ? err.message : '保存失败');
     } finally {
@@ -257,7 +257,7 @@ export function TimelineNodeEditor() {
           <Button
             type="button"
             variant="ghost"
-            onClick={() => navigate('/gy-admin/timeline')}
+            onClick={() => navigate('/admin/timeline')}
           >
             取消
           </Button>

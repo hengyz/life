@@ -38,20 +38,20 @@ export function AdminDashboard() {
       </div>
 
       <div className="space-y-3">
-        <Link to="/gy-admin/timeline/new">
+        <Link to="/admin/timeline/new">
           <Button fullWidth>新增时间节点</Button>
         </Link>
-        <Link to="/gy-admin/pet">
+        <Link to="/admin/pet">
           <Button variant="secondary" fullWidth>
             编辑狗狗信息
           </Button>
         </Link>
-        <Link to="/gy-admin/timeline">
+        <Link to="/admin/timeline">
           <Button variant="ghost" fullWidth>
             管理时间轴
           </Button>
         </Link>
-        <Link to="/gy-admin/prep">
+        <Link to="/admin/prep">
           <Button variant="secondary" fullWidth>
             管理备婚规划
           </Button>

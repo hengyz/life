@@ -50,7 +50,7 @@ npm run dev
 - 前台首页：`/`
 - 狗狗主页：`/dog`
 - 时间轴：`/dog/timeline`
-- 管理后台：`/gy-admin`（默认密码见 `.dev.vars`）
+- 管理后台：`/admin`（默认密码见 `.dev.vars`）
 
 ## 创建 D1 数据库
 

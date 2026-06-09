@@ -21,14 +21,14 @@ import { PrepHome } from './routes/prep/PrepHome';
 
 function RequireAuth({ children }: { children: React.ReactNode }) {
   if (!isLoggedIn()) {
-    return <Navigate to="/gy-admin" replace />;
+    return <Navigate to="/admin" replace />;
   }
   return <>{children}</>;
 }
 
 function GyAdminIndex() {
   if (isLoggedIn()) {
-    return <Navigate to="/gy-admin/dashboard" replace />;
+    return <Navigate to="/admin/dashboard" replace />;
   }
   return <AdminLogin />;
 }
@@ -45,7 +45,7 @@ export function App() {
       <Route path="/prep/budget" element={<PrepBudget />} />
       <Route path="/prep/checklist" element={<PrepChecklist />} />
 
-      <Route path="/gy-admin" element={<Outlet />}>
+      <Route path="/admin" element={<Outlet />}>
         <Route index element={<GyAdminIndex />} />
         <Route
           element={

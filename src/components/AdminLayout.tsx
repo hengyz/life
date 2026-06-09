@@ -7,14 +7,14 @@ export function AdminLayout() {
 
   function handleLogout() {
     clearToken();
-    navigate('/gy-admin');
+    navigate('/admin');
   }
 
   return (
     <div className="min-h-dvh bg-cream">
       <header className="sticky top-0 z-40 border-b border-warm-100 bg-white/90 backdrop-blur">
         <div className="mx-auto flex max-w-lg items-center justify-between px-4 py-3">
-          <Link to="/gy-admin/dashboard" className="font-semibold text-ink">
+          <Link to="/admin/dashboard" className="font-semibold text-ink">
             光影管理
           </Link>
           <Button variant="ghost" size="sm" onClick={handleLogout}>
@@ -22,10 +22,10 @@ export function AdminLayout() {
           </Button>
         </div>
         <nav className="mx-auto flex max-w-lg gap-1 px-4 pb-2">
-          <NavLink to="/gy-admin/dashboard">概览</NavLink>
-          <NavLink to="/gy-admin/pet">狗狗信息</NavLink>
-          <NavLink to="/gy-admin/timeline">时间轴</NavLink>
-          <NavLink to="/gy-admin/prep">备婚规划</NavLink>
+          <NavLink to="/admin/dashboard">概览</NavLink>
+          <NavLink to="/admin/pet">狗狗信息</NavLink>
+          <NavLink to="/admin/timeline">时间轴</NavLink>
+          <NavLink to="/admin/prep">备婚规划</NavLink>
         </nav>
       </header>
       <main className="page-container">

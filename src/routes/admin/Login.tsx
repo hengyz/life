@@ -19,7 +19,7 @@ export function AdminLogin() {
     try {
       const { token } = await adminLogin(password);
       setToken(token);
-      navigate('/gy-admin/dashboard');
+      navigate('/admin/dashboard');
     } catch (err) {
       setError(err instanceof Error ? err.message : '登录失败');
     } finally {

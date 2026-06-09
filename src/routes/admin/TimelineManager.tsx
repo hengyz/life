@@ -32,7 +32,7 @@ export function TimelineManager() {
     <div>
       <div className="mb-6 flex items-center justify-between">
         <h1 className="text-xl font-bold text-ink">时间轴管理</h1>
-        <Link to="/gy-admin/timeline/new">
+        <Link to="/admin/timeline/new">
           <Button size="sm">新增</Button>
         </Link>
       </div>
@@ -60,7 +60,7 @@ export function TimelineManager() {
                 <p className="mt-0.5 truncate font-medium text-ink">{node.title}</p>
               </div>
               <div className="flex shrink-0 gap-2">
-                <Link to={`/gy-admin/timeline/${node.id}`}>
+                <Link to={`/admin/timeline/${node.id}`}>
                   <Button variant="secondary" size="sm">
                     编辑
                   </Button>
