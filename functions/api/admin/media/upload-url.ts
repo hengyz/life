@@ -1,5 +1,5 @@
 import { requireAdmin } from '../../../_shared/auth';
-import { buildR2Key } from '../../../_shared/r2';
+import { buildR2Key, r2PublicUrl } from '../../../_shared/r2';
 import { errorResponse, handleOptions, jsonResponse } from '../../../_shared/response';
 import type { Env } from '../../../_shared/types';
 
@@ -13,10 +13,7 @@ export const onRequest: PagesFunction<Env> = async (context) => {
   if (authError) return authError;
 
   if (!env.MEDIA) {
-    return errorResponse(
-      'R2 storage not configured. Use manual URL input for now.',
-      501,
-    );
+    return errorResponse('R2 未绑定，请使用手动 URL 输入', 503);
   }
 
   let body: { filename?: string; contentType?: string };
@@ -28,11 +25,12 @@ export const onRequest: PagesFunction<Env> = async (context) => {
 
   if (!body.filename) return errorResponse('filename is required', 400);
 
-  const key = buildR2Key(`${Date.now()}-${body.filename}`);
+  const safeName = body.filename.replace(/[^a-zA-Z0-9._-]/g, '_');
+  const key = buildR2Key(`${Date.now()}-${safeName}`);
 
   return jsonResponse({
-    uploadUrl: null,
     key,
-    message: 'R2 presigned upload not yet implemented. Please use manual URL input.',
+    publicUrl: r2PublicUrl(env, key),
+    message: '请使用 POST /api/admin/media/upload 直接上传文件',
   });
 };

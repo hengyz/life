@@ -140,6 +140,34 @@ export function adminDeleteNode(id: number): Promise<{ success: boolean }> {
   return request(`/admin/timeline/${id}`, { method: 'DELETE' }, true);
 }
 
+export async function adminUploadImage(file: File): Promise<{ url: string; key: string }> {
+  const form = new FormData();
+  form.append('file', file);
+
+  const headers: Record<string, string> = {};
+  const token = getToken();
+  if (token) headers['Authorization'] = `Bearer ${token}`;
+
+  const res = await fetch(`${API_BASE}/admin/media/upload`, {
+    method: 'POST',
+    headers,
+    body: form,
+  });
+
+  if (!res.ok) {
+    let message = '上传失败';
+    try {
+      const data = await res.json();
+      message = data.error || message;
+    } catch {
+      // ignore
+    }
+    throw new ApiError(message, res.status);
+  }
+
+  return res.json();
+}
+
 // Prep API
 export function fetchPrepOverview(): Promise<PrepOverview> {
   return request<PrepOverview>('/prep');

@@ -1,5 +1,6 @@
 import { useEffect, useState } from 'react';
 import { Button } from '../../components/Button';
+import { ImageUploadButton } from '../../components/ImageUploadButton';
 import { Input } from '../../components/Input';
 import { Textarea } from '../../components/Textarea';
 import { adminFetchPet, adminUpdatePet } from '../../lib/api';
@@ -57,6 +58,17 @@ export function PetProfileEditor() {
           onChange={(e) => update('avatar_url', e.target.value)}
           placeholder="https://..."
         />
+        <ImageUploadButton
+          label="上传头像"
+          onUploaded={(url) => update('avatar_url', url)}
+        />
+        {form.avatar_url && (
+          <img
+            src={form.avatar_url}
+            alt="头像预览"
+            className="h-24 w-24 rounded-2xl object-cover"
+          />
+        )}
         <Input
           label="生日"
           type="date"
