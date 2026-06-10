@@ -149,6 +149,7 @@ export async function adminUploadImage(
   const form = new FormData();
   form.append('file', file);
   form.append('folder', folder);
+  form.append('capturedAt', new Date(file.lastModified).toISOString());
 
   const headers: Record<string, string> = {};
   const token = getToken();

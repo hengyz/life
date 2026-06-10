@@ -80,7 +80,9 @@ export function ImageUploadButton({
         {uploading ? progress || '上传中...' : label}
       </Button>
       <p className="mt-1 text-xs text-ink/40">
-        {multiple ? '支持 JPG/PNG/WebP/GIF，单张最大 10MB，可多选' : '支持 JPG/PNG/WebP/GIF，单张最大 10MB'}
+        {multiple
+          ? '支持 JPG/PNG/WebP/GIF，单张最大 10MB，可多选。文件名按拍摄时间命名（如 20250609143025.jpg）'
+          : '支持 JPG/PNG/WebP/GIF，单张最大 10MB。文件名按拍摄时间命名（如 20250609143025.jpg）'}
       </p>
       {success && <p className="mt-1 text-xs text-green-600">{success}</p>}
       {error && <p className="mt-1 text-xs text-red-500">{error}</p>}

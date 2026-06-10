@@ -1,6 +1,10 @@
 import { requireAdmin } from '../../../_shared/auth';
 import {
-  buildR2Key,
+  buildUniquePhotoKey,
+  formatPhotoFilename,
+  resolveCaptureDate,
+} from '../../../_shared/photo-date';
+import {
   extFromImageType,
   isR2Folder,
   R2_ALLOWED_IMAGE_TYPES,
@@ -56,9 +60,14 @@ export const onRequest: PagesFunction<Env> = async (context) => {
   }
 
   const ext = extFromImageType(file.type);
-  const key = buildR2Key(folder, `${Date.now()}-${crypto.randomUUID().slice(0, 8)}.${ext}`);
+  const capturedAtHint = formData.get('capturedAt')?.toString() || null;
 
-  await env.MEDIA.put(key, file.stream(), {
+  const buffer = await file.arrayBuffer();
+  const captureDate = resolveCaptureDate(buffer, file.type, capturedAtHint);
+  const baseName = formatPhotoFilename(captureDate);
+  const key = await buildUniquePhotoKey(env, folder, baseName, ext);
+
+  await env.MEDIA.put(key, buffer, {
     httpMetadata: { contentType: file.type },
   });
 
